@@ -3,6 +3,8 @@ package com.example.fitness.entitties;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.Date;
 
@@ -16,17 +18,14 @@ public class Daily_activities {
     private Integer activity_id;
     @Column(nullable = false)
     private Integer user_id;
-    @UpdateTimestamp
-    @Column(name = "date")
-    private Date Date;
     @Column(nullable = false)
     private Integer steps;
     @Column(nullable = false)
     private Float sleep_hours;
     @Column(nullable = false)
-    private DecimalFormat water_intake ;
+    private Float water_intake;
     @Column(nullable = false)
-    private DecimalFormat calories_burned ;
+    private Float calories_burned;
     @Column(nullable = false)
     private String mood ;
     @Column(nullable = false)
@@ -44,12 +43,6 @@ public class Daily_activities {
     public void setUser_id(Integer user_id) {
         this.user_id = user_id;
     }
-    public Date getDate() {
-        return Date;
-    }
-    public void setDate(Date date) {
-        Date = date;
-    }
     public Integer getSteps() {
         return steps;
     }
@@ -62,16 +55,16 @@ public class Daily_activities {
     public void setSleep_hours(Float sleep_hours) {
         this.sleep_hours = sleep_hours;
     }
-    public DecimalFormat getWater_intake() {
+    public Float getWater_intake() {
         return water_intake;
     }
-    public void setWater_intake(DecimalFormat water_intake) {
+    public void setWater_intake(Float water_intake) {
         this.water_intake = water_intake;
     }
-    public DecimalFormat getCalories_burned() {
+    public Float getCalories_burned() {
         return calories_burned;
     }
-    public void setCalories_burned(DecimalFormat calories_burned) {
+    public void setCalories_burned(Float calories_burned) {
         this.calories_burned = calories_burned;
     }
     public String getMood() {

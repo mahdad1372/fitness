@@ -46,8 +46,10 @@ public class UserController {
     }
     @PostMapping("/adduser")
     public void adduser(@RequestBody User users){
-        userService.adduser(users.getFirstname(), users.getLastname(), users.getGender(), users.getEmail(),
-                users.getPassword(),users.getWeight(),users.getHeight(),users.getBmi());
+        System.out.println("User id : "+users.getUser_id());
+        userService.adduser(users.getUser_id(),users.getBmi(),users.getEmail(),
+                users.getFirstname(),users.getGender(),users.getHeight(),users.getLastname(),
+                users.getPassword(),users.getWeight());
     }
     @DeleteMapping("/deleteuser")
     public void deleteuser(@RequestBody User users) {

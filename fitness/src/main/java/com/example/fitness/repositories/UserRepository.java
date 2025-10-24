@@ -23,10 +23,10 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     @Transactional
     @Query(
             value =
-                    "INSERT INTO Users (firstname,lastname,gender,email,password,weight,height,bmi) " +
-                            "values (?1,?2,?3,?4,?5,?6,?7,?8)",
+                    "INSERT INTO Users (user_id,bmi,email,firstname,gender,height,lastname,password,weight) " +
+                            "values (?1,?2,?3,?4,?5,?6,?7,?8,?9)",
             nativeQuery = true)
-    void addUser(String firstname,String lastname,String gender,String email,String password
-    ,Float weight,Float height,Float bmi);
+    void addUser(Integer user_id,Float bmi,String email,String firstname,String gender,Float height
+    ,String lastname,String password,Float weight);
 
 }

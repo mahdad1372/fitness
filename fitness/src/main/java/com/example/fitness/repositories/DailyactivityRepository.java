@@ -1,13 +1,11 @@
 package com.example.fitness.repositories;
 import com.example.fitness.entitties.Daily_activities;
 import jakarta.transaction.Transactional;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-
-import java.text.DecimalFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,13 +23,14 @@ public interface DailyactivityRepository extends CrudRepository<Daily_activities
 //    @Query(value="SELECT * FROM Users a WHERE a.firstname=?1 AND a.email=?2", nativeQuery=true)
 //    List<User> fetchallfromcustomerswithName(String first_name,String email);
 //    @Modifying
-    @Transactional
-    @Query(
-            value =
-                    "INSERT INTO daily_activities (user_id,Date,steps,sleep_hours,water_intake,calories_burned,mood,notes) " +
-                            "values (?1,?2,?3,?4,?5,?6,?7,?8)",
-            nativeQuery = true)
-    void addDailyActivity(Integer user_id, Date Date, Integer steps, Float sleep_hours, DecimalFormat water_intake
-            , DecimalFormat calories_burned, String mood, String notes);
+@Transactional
+@Modifying
+@Query(
+        value = "INSERT INTO daily_activities (user_id, steps, sleep_hours, mood, notes,water_intake,calories_burned) " +
+                "VALUES (?1, ?2, ?3, ?4, ?5,?6,?7)",
+        nativeQuery = true
+)
+void addDailyActivity(Integer user_id, Integer steps, Float sleep_hours, String mood, String notes
+,Float water_intake,Float calories_burned);
 
 }

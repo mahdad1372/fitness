@@ -26,7 +26,8 @@ public class SecurityConfiguration {
                 .and()
                 .authorizeHttpRequests()
                 // Public APIs that don't require authentication
-                .requestMatchers("/users/all", "/auth/**", "/auth/login", "/category/**", "/cart/**", "/getproducts", "/images/**"
+                .requestMatchers("/users/all","/users/adduser", "/auth/**","/activity/addactivity"
+                        ,"/auth/login", "/category/**", "/cart/**", "/getproducts", "/images/**"
                         ,"/getproduct/**","/getproductbycategory/**","/users/adduser")
                 .permitAll()
                 // Protected APIs that require authentication

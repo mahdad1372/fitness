@@ -3,6 +3,7 @@ import com.example.fitness.entitties.Daily_activities;
 import com.example.fitness.repositories.DailyactivityRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,10 +22,9 @@ public class DailyActivityService {
     public List<Daily_activities> fetchAll(){
         return dailyactivityRepository.getaAllDailyActivities();
     }
-    public void addDailyActivities(Integer user_id, Date date, Integer steps, Float sleep_hours, DecimalFormat water_intake
-            , DecimalFormat calories_burned, String mood, String notes) {
-        dailyactivityRepository.addDailyActivity(user_id,date,steps,sleep_hours,water_intake,
-               calories_burned,mood,notes);
+    public void addDailyActivities(Integer user_id, Integer steps, Float sleep_hours, String mood, String notes
+     , Float water_intake , Float calories_burned) {
+        dailyactivityRepository.addDailyActivity(user_id,steps,sleep_hours,mood,notes,water_intake,calories_burned);
     }
     public void deleteActivitiesById(Integer id){
         dailyactivityRepository.deleteDaily_activitiesById(id);
