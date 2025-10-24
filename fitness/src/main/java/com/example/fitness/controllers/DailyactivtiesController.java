@@ -1,5 +1,5 @@
 package com.example.fitness.controllers;
-import com.example.fitness.entitties.User;
+import com.example.fitness.entitties.Daily_activities;
 import com.example.fitness.services.DailyActivityService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,27 +13,19 @@ public class DailyactivtiesController {
     }
     @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
     @GetMapping("/all")
-    public ResponseEntity<List<User>> allUsers() {
-        List<User> users = userService.fetchAll();
-        return ResponseEntity.ok(users);
+    public ResponseEntity<List<Daily_activities>> allDailyActivities() {
+        List<Daily_activities> daily_activities = dailyactivityservice.allDailyActivities();
+        return ResponseEntity.ok(daily_activities);
     }
-    @GetMapping("/public-info")
-    public String getPublicInfo() {
-        return "This is a public API. No authentication required!";
+    @PostMapping("/addactivity")
+    public void addactivity(@RequestBody Daily_activities daily_activities){
+        dailyactivityservice.addDailyActivities(daily_activities.getUser_id(), daily_activities.getDate(),
+                daily_activities.getSteps(), daily_activities.getSleep_hours(),
+                daily_activities.getWater_intake(),daily_activities.getCalories_burned(),
+                daily_activities.getMood(),daily_activities.getNotes());
     }
-
-    // Public API 2: Another endpoint accessible without JWT
-    @GetMapping("/about")
-    public String getAboutInfo() {
-        return "Welcome to the application! This is publicly available information.";
-    }
-    @PostMapping("/adduser")
-    public void adduser(@RequestBody User users){
-        userService.adduser(users.getFirstname(), users.getLastname(), users.getGender(), users.getEmail(),
-                users.getPassword(),users.getWeight(),users.getHeight(),users.getBmi());
-    }
-    @DeleteMapping("/deleteuser")
-    public void deleteuser(@RequestBody User users) {
-        userService.deleteuserbyId(users.getUser_id());
+    @DeleteMapping("/deleteactivity/{id}")
+    public void deleteadctivitybyId(@PathVariable("id") Integer id) {
+        dailyactivityservice.deleteActivitiesById(id);
     }
 }

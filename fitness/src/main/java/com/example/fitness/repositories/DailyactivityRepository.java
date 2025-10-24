@@ -1,5 +1,4 @@
 package com.example.fitness.repositories;
-import com.example.fitness.entitties.User;
 import com.example.fitness.entitties.Daily_activities;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.Modifying;

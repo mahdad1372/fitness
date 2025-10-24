@@ -37,4 +37,71 @@ public class Daily_activities {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private Date updatedAt;
+
+    public Integer getUser_id() {
+        return user_id;
+    }
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
+    }
+    public Date getDate() {
+        return Date;
+    }
+    public void setDate(Date date) {
+        Date = date;
+    }
+    public Integer getSteps() {
+        return steps;
+    }
+    public void setSteps(Integer steps) {
+        this.steps = steps;
+    }
+    public Float getSleep_hours() {
+        return sleep_hours;
+    }
+    public void setSleep_hours(Float sleep_hours) {
+        this.sleep_hours = sleep_hours;
+    }
+    public DecimalFormat getWater_intake() {
+        return water_intake;
+    }
+    public void setWater_intake(DecimalFormat water_intake) {
+        this.water_intake = water_intake;
+    }
+    public DecimalFormat getCalories_burned() {
+        return calories_burned;
+    }
+    public void setCalories_burned(DecimalFormat calories_burned) {
+        this.calories_burned = calories_burned;
+    }
+    public String getMood() {
+        return mood;
+    }
+    public void setMood(String mood) {
+        this.mood = mood;
+    }
+    public String getNotes() {
+        return notes;
+    }
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+    public Integer getActivity_id() {
+        return activity_id;
+    }
+    public void setActivity_id(Integer activity_id) {
+        this.activity_id = activity_id;
+    }
 }
