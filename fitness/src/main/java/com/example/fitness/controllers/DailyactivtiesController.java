@@ -11,7 +11,6 @@ public class DailyactivtiesController {
     public DailyactivtiesController(DailyActivityService dailyActivityService) {
         this.dailyactivityservice = dailyActivityService;
     }
-//    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
     @GetMapping("/all")
     public ResponseEntity<List<Daily_activities>> allDailyActivities() {
         List<Daily_activities> daily_activities = dailyactivityservice.allDailyActivities();

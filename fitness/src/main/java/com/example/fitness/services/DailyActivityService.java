@@ -2,11 +2,7 @@ package com.example.fitness.services;
 import com.example.fitness.entitties.Daily_activities;
 import com.example.fitness.repositories.DailyactivityRepository;
 import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 @Service
 public class DailyActivityService {
