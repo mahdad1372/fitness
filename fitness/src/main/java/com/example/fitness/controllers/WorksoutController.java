@@ -1,5 +1,4 @@
 package com.example.fitness.controllers;
-
 import com.example.fitness.entitties.Workouts;
 import com.example.fitness.services.WorkoutsService;
 import org.springframework.http.ResponseEntity;
