@@ -13,7 +13,7 @@ public class DailyactivtiesController {
     }
     @GetMapping("/all")
     public ResponseEntity<List<Daily_activities>> allDailyActivities() {
-        List<Daily_activities> daily_activities = dailyactivityservice.allDailyActivities();
+        List<Daily_activities> daily_activities = dailyactivityservice.fetchAll();
         return ResponseEntity.ok(daily_activities);
     }
     @PostMapping("/addactivity")

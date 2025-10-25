@@ -1,6 +1,4 @@
 package com.example.fitness.repositories;
-
-import com.example.fitness.entitties.Daily_activities;
 import com.example.fitness.entitties.Foods;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.Modifying;
@@ -25,11 +23,11 @@ public interface FoodsRepository extends CrudRepository<Foods, Integer> {
     @Transactional
     @Modifying
     @Query(
-            value = "INSERT INTO Foods (user_id, food_name, category, calories, protein,carbohydrates,fats,notes) " +
-                    "VALUES (?1, ?2, ?3, ?4, ?5,?6,?7,?8)",
+            value = "INSERT INTO Foods (user_id, food_name, category, calories, protein,carbohydrates,fats,notes,meal_time) " +
+                    "VALUES (?1, ?2, ?3, ?4, ?5,?6,?7,?8,?9)",
             nativeQuery = true
     )
-    void addDailyActivity(Integer user_id, String food_name, String category, Float calories, Float protein
-            ,Float carbohydrates,Float fats,String notes);
+    void addfoods(Integer user_id, String food_name, String category, Float calories, Float protein
+            ,Float carbohydrates,Float fats,String notes,String meal_time);
 
 }

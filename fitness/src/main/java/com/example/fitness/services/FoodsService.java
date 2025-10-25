@@ -24,8 +24,9 @@ public class FoodsService {
         return foodsRepository.getAllFoods();
     }
     public void addFoods(Integer user_id, String food_name, String category, Float calories, Float protein
-            , Float carbohydrates , Float fats, String notes) {
-        foodsRepository.addDailyActivity(user_id,food_name,category,calories,protein,carbohydrates,fats,notes);
+            , Float carbohydrates , Float fats, String notes,String meal_time) {
+        foodsRepository.addfoods(user_id,food_name,category,calories,protein,carbohydrates,fats,notes,meal_time);
+        System.out.println("This is the id :");
     }
     public void deleteFoodsbyId(Integer id){
         foodsRepository.deleteFoodsByFood_id(id);

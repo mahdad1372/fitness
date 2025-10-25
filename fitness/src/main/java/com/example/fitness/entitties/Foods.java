@@ -27,6 +27,8 @@ public class Foods {
     @Column(nullable = false)
     private Float fats;
     @Column(nullable = false)
+    private String meal_time;
+    @Column(nullable = false)
     private String notes;
     @CreationTimestamp
     @Column(updatable = false, name = "created_at")
@@ -102,4 +104,10 @@ public class Foods {
         this.food_id = food_id;
     }
 
+    public String getMeal_time() {
+        return meal_time;
+    }
+    public void setMeal_time(String meal_time) {
+        this.meal_time = meal_time;
+    }
 }

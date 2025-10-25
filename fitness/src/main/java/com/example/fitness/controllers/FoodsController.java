@@ -1,8 +1,5 @@
 package com.example.fitness.controllers;
-
-import com.example.fitness.entitties.Daily_activities;
 import com.example.fitness.entitties.Foods;
-import com.example.fitness.services.DailyActivityService;
 import com.example.fitness.services.FoodsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +20,10 @@ public class FoodsController {
     }
     @PostMapping("/addfoods")
     public void addfood(@RequestBody Foods foods){
-        foodsService.addFoods(foods.getFood_id(),foods.getFood_name(),foods.getCategory(),
-                foods.getCalories(),foods.getProtein(),foods.getCarbohydrates(),foods.getFats(),foods.getNotes());
+        foodsService.addFoods(foods.getUser_id(),foods.getFood_name(),foods.getCategory(),
+                foods.getCalories(),foods.getProtein(),foods.getCarbohydrates(),foods.getFats(),foods.getNotes()
+                ,foods.getMeal_time());
+
     }
 
     @DeleteMapping("/deletefoods/{id}")
