@@ -20,9 +20,6 @@ public interface DailyactivityRepository extends CrudRepository<Daily_activities
     @Transactional
     @Query(value = "DELETE FROM daily_activities WHERE activity_id = :id", nativeQuery = true)
     public void deleteDaily_activitiesById(Integer id);
-//    @Query(value="SELECT * FROM Users a WHERE a.firstname=?1 AND a.email=?2", nativeQuery=true)
-//    List<User> fetchallfromcustomerswithName(String first_name,String email);
-//    @Modifying
 @Transactional
 @Modifying
 @Query(
