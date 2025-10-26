@@ -1,17 +1,21 @@
 package com.example.fitness.controllers;
 import com.example.fitness.entitties.User;
+import com.example.fitness.services.Complexlogic;
 import com.example.fitness.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping("/users")
 @RestController
 public class UserController {
+    private final Complexlogic complexlogic;
     private final UserService userService;
-    public UserController(UserService userService) {
+    public UserController(UserService userService, Complexlogic complexlogic) {
+        this.complexlogic = complexlogic;
         this.userService = userService;
     }
     @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
@@ -54,5 +58,11 @@ public class UserController {
     @DeleteMapping("/deleteuser")
     public void deleteuser(@RequestBody User users) {
         userService.deleteuserbyId(users.getUser_id());
+    }
+    @GetMapping("/getbmi")
+    public ResponseEntity<Map<String, String>> calculateBmi(@RequestBody User users) {
+        String result = String.valueOf(complexlogic.bmi(users.getUser_id()));
+        return ResponseEntity.ok(Map.of("message", result));
+
     }
 }

@@ -1,11 +1,8 @@
 package com.example.fitness.services;
 
-import com.example.fitness.entitties.Daily_activities;
 import com.example.fitness.entitties.Foods;
-import com.example.fitness.repositories.DailyactivityRepository;
 import com.example.fitness.repositories.FoodsRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 

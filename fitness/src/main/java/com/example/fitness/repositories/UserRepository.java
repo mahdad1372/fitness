@@ -13,6 +13,9 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     @Query(value="SELECT * FROM Users a WHERE a.email=?1", nativeQuery=true)
     Optional<User> findByEmail(String email);
 
+    @Query(value="SELECT * FROM Users a WHERE a.user_id=?1", nativeQuery=true)
+    List<User> findByUser_id(Integer id);
+
     @Query(value = "SELECT * FROM Users" , nativeQuery = true)
     public List<User> getAllUsers();
     @Modifying
