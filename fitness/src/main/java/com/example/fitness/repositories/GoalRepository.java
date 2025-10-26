@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,8 +31,8 @@ public interface GoalRepository extends CrudRepository<Goals, Integer> {
                     "VALUES (?1, ?2, ?3, ?4, ?5,?6,?7)",
             nativeQuery = true
     )
-    void addgoals(Integer user_id, String goal_type, String target_value, Float calories, Float protein
-            ,Float carbohydrates,Float fats,String notes,String meal_time);
+    void addgoals(Integer user_id, String goal_type, Float target_value, Float current_value, Date start_date
+            ,Date end_date,String status);
 
 }
 
