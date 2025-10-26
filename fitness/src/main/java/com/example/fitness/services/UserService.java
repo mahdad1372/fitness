@@ -20,9 +20,9 @@ public class UserService {
     public List<User> fetchAll(){
         return userRepository.getAllUsers();
     }
-    public void adduser(Integer id,Float bmi,String email,String firstname,String gender,Float height
+    public void adduser(Integer id,String email,String firstname,String gender,Float height
             ,String lastname,String password,Float weight) {
-        userRepository.addUser(id,bmi,email,firstname,gender,height,lastname,password,weight);
+        userRepository.addUser(id,email,firstname,gender,height,lastname,password,weight);
 
     }
     public void deleteuserbyId(Integer id){

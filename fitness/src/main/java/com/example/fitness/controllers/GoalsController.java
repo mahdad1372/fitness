@@ -1,8 +1,6 @@
 package com.example.fitness.controllers;
 
-import com.example.fitness.entitties.Daily_activities;
 import com.example.fitness.entitties.Goals;
-import com.example.fitness.services.DailyActivityService;
 import com.example.fitness.services.GoalService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,9 +25,9 @@ public class GoalsController {
         ,goals.getStart_date(),goals.getEnd_date(),goals.getStatus());
     }
 
-//    @DeleteMapping("/deleteactivity/{id}")
-//    public void deleteadctivitybyId(@PathVariable("id") Integer id) {
-//        dailyactivityservice.deleteActivitiesById(id);
-//    }
+    @DeleteMapping("/deleteactivity/{id}")
+    public void deletegoalsbyId(@PathVariable("id") Integer id) {
+        goalservice.deleteActivitiesById(id);
+    }
 }
 

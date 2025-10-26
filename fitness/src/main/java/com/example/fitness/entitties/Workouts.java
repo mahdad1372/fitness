@@ -1,13 +1,11 @@
 package com.example.fitness.entitties;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
-
+@Table(name = "workouts")
+@Entity
 public class Workouts {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

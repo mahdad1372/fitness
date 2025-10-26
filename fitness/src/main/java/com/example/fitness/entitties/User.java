@@ -31,8 +31,6 @@ public class User implements UserDetails {
     private Float weight;
     @Column(nullable = false)
     private Float height;
-    @Column(nullable = false)
-    private Float bmi;
     @CreationTimestamp
     @Column(updatable = false, name = "created_at")
     private Date createdAt;
@@ -75,9 +73,6 @@ public class User implements UserDetails {
         return height;
     }
 
-    public Float getBmi() {
-        return bmi;
-    }
 
     public Float getWeight() {
         return weight;
@@ -111,9 +106,6 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-    public void setBmi(Float bmi) {
-        this.bmi = bmi;
-    }
 
     public void setUser_id(Integer user_id) {
         this.user_id = user_id;

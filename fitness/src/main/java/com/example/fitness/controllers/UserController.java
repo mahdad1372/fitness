@@ -47,7 +47,7 @@ public class UserController {
     @PostMapping("/adduser")
     public void adduser(@RequestBody User users){
         System.out.println("User id : "+users.getUser_id());
-        userService.adduser(users.getUser_id(),users.getBmi(),users.getEmail(),
+        userService.adduser(users.getUser_id(),users.getEmail(),
                 users.getFirstname(),users.getGender(),users.getHeight(),users.getLastname(),
                 users.getPassword(),users.getWeight());
     }
