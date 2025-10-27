@@ -1,11 +1,10 @@
 package com.example.fitness.services;
-import com.example.fitness.entitties.Daily_activities;
 import com.example.fitness.entitties.Workouts;
-import com.example.fitness.repositories.DailyactivityRepository;
 import com.example.fitness.repositories.WorksoutsRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 @Service
 public class WorkoutsService {
@@ -27,4 +26,7 @@ public class WorkoutsService {
     public void deleteWorksOutsById(Integer id){
         worksoutsRepository.deleteWorkoutsByWorkout_id(id);
     }
+    public List<Workouts> fetchWorkoutsByday(String created_at){
+      return worksoutsRepository.findWorkoutsByday(created_at);
+    };
 }

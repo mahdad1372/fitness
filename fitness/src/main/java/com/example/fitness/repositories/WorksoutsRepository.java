@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,10 @@ import java.util.Optional;
 public interface WorksoutsRepository extends CrudRepository<Workouts, Integer> {
     @Query(value="SELECT * FROM Workouts a WHERE a.workout_id=?1", nativeQuery=true)
     Optional<Workouts> findWorkoutsByWorkout_id(Integer workout_id);
+
+    @Query(value="SELECT * FROM workouts WHERE DATE(created_at) =?1", nativeQuery=true)
+    List<Workouts> findWorkoutsByday(String createdAt);
+
 
     @Query(value = "SELECT * FROM Workouts" , nativeQuery = true)
     public List<Workouts> getAllWorkouts();

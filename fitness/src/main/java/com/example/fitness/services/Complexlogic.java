@@ -18,7 +18,6 @@ public class Complexlogic {
         Float height = user.get(0).getHeight();
         Float bmi = weight / (height * height);
         String status;
-
         if (bmi < 18.5) status = "Underweight";
         else if (bmi < 25) status = "Normal weight";
         else if (bmi < 30) status = "Overweight";
@@ -28,4 +27,13 @@ public class Complexlogic {
 
         return String.format("The BMI is : %.1f (%s)", bmi, status);
     }
+
+//    public String performance(Integer id) {
+//        float avgDuration = totalDuration / totalWorkouts;
+//        float intensityFactor = (float) (totalCalories / totalDuration);
+//        float consistency = (float) workoutsThisWeek / 5; // out of 5 recommended days
+//
+//        float performanceScore = (avgDuration * intensityFactor * consistency);
+//    }
+
 }
