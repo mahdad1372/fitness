@@ -1,5 +1,6 @@
 package com.example.fitness.controllers;
 import com.example.fitness.entitties.Workouts;
+import com.example.fitness.services.Complexlogic;
 import com.example.fitness.services.WorkoutsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,8 +12,10 @@ import java.util.List;
 @RestController
 public class WorksoutController {
     private final WorkoutsService workoutsService;
-    public WorksoutController(WorkoutsService workoutsService) {
+    private Complexlogic complexlogic;
+    public WorksoutController(WorkoutsService workoutsService, Complexlogic complexlogic) {
         this.workoutsService = workoutsService;
+        this.complexlogic = complexlogic;
     }
     @GetMapping("/all")
         public ResponseEntity<List<Workouts>> allDailyActivities() {
@@ -23,10 +26,23 @@ public class WorksoutController {
     @GetMapping("/daily")
     public ResponseEntity<List<Workouts>> DailyActivities(@RequestBody Workouts workouts) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        System.out.println(formatter.format(workouts.getCreatedAt())); //
         List<Workouts> dailyworksout = workoutsService.fetchWorkoutsByday(
-                formatter.format(workouts.getCreatedAt()));
-        System.out.println(workouts.getCreatedAt());
+                formatter.format(workouts.getCreatedAt()),workouts.getUser_id());
+        List<Workouts> weekworksout = workoutsService.fetchWorkoutsByweek(
+                formatter.format(workouts.getCreatedAt()),workouts.getUser_id());
+        Integer totalWorkouts = dailyworksout.size();
+        Integer workoutsThisWeek = weekworksout.size();
+        float totalDuration = 0;
+        float totalCalories = 0;
+        for (Workouts w : dailyworksout) {
+            totalCalories += w.getCalories_burned();
+        }
+        for (Workouts w : dailyworksout) {
+            totalDuration += w.getDuration();
+        }
+        Float performancescore = complexlogic.performance(totalDuration,totalWorkouts,totalCalories,workoutsThisWeek);
+
+        System.out.println(performancescore);
         return ResponseEntity.ok(dailyworksout);
     }
 

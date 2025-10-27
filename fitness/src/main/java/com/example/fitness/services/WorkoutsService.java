@@ -18,6 +18,7 @@ public class WorkoutsService {
         return workoutsList;
     }
     public List<Workouts> fetchAll(){
+        System.out.println("Fetching all workouts");
         return worksoutsRepository.getAllWorkouts();
     }
     public void addDailyWorkouts(Integer user_id, String type, Integer duration, Float calories_burned) {
@@ -26,7 +27,10 @@ public class WorkoutsService {
     public void deleteWorksOutsById(Integer id){
         worksoutsRepository.deleteWorkoutsByWorkout_id(id);
     }
-    public List<Workouts> fetchWorkoutsByday(String created_at){
-      return worksoutsRepository.findWorkoutsByday(created_at);
+    public List<Workouts> fetchWorkoutsByday(String created_at,Integer user_id) {
+      return worksoutsRepository.findWorkoutsByday(created_at,user_id);
+    };
+    public List<Workouts> fetchWorkoutsByweek(String created_at,Integer user_id) {
+        return worksoutsRepository.findWorkoutsByweek(created_at,user_id);
     };
 }

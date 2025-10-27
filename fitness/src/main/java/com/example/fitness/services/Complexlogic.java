@@ -28,12 +28,14 @@ public class Complexlogic {
         return String.format("The BMI is : %.1f (%s)", bmi, status);
     }
 
-//    public String performance(Integer id) {
-//        float avgDuration = totalDuration / totalWorkouts;
-//        float intensityFactor = (float) (totalCalories / totalDuration);
-//        float consistency = (float) workoutsThisWeek / 5; // out of 5 recommended days
-//
-//        float performanceScore = (avgDuration * intensityFactor * consistency);
-//    }
+    public Float performance(Float totalDuration , Integer totalWorkouts,
+                              Float totalCalories,Integer workoutsThisWeek) {
+
+        Float avgDuration = (Float) totalDuration / (float) totalWorkouts;
+        Float intensityFactor = (float) (totalCalories / totalDuration);
+        Float consistency = (float) workoutsThisWeek / 5;
+        Float performanceScore = (avgDuration * intensityFactor * consistency);
+        return performanceScore;
+    }
 
 }
