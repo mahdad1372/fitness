@@ -28,14 +28,30 @@ public class Complexlogic {
         return String.format("The BMI is : %.1f (%s)", bmi, status);
     }
 
-    public Float performance(Float totalDuration , Integer totalWorkouts,
+    public String performance(Float totalDuration , Integer totalWorkouts,
                               Float totalCalories,Integer workoutsThisWeek) {
 
         Float avgDuration = (Float) totalDuration / (float) totalWorkouts;
         Float intensityFactor = (float) (totalCalories / totalDuration);
         Float consistency = (float) workoutsThisWeek / 5;
         Float performanceScore = (avgDuration * intensityFactor * consistency);
-        return performanceScore;
+
+        String Status;
+
+        if (performanceScore < 20) {
+            Status = "Poor";
+        } else if (performanceScore < 40) {
+            Status = "Needs Improvement";
+        } else if (performanceScore < 60) {
+            Status = "Good";
+        } else if (performanceScore < 80) {
+            Status = "Very Good";
+        } else {
+            Status = "Excellent";
+        }
+        String massage = "The performance score is " + performanceScore + " and your performance is "
+                + Status;
+        return massage;
     }
 
 }

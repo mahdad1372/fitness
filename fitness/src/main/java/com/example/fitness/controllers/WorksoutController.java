@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping("/worksout")
 @RestController
@@ -23,8 +24,8 @@ public class WorksoutController {
         return ResponseEntity.ok(dailyworksout);
     }
 
-    @GetMapping("/daily")
-    public ResponseEntity<List<Workouts>> DailyActivities(@RequestBody Workouts workouts) {
+    @GetMapping("/performance")
+    public ResponseEntity<Map<String, Object>> DailyActivities(@RequestBody Workouts workouts) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         List<Workouts> dailyworksout = workoutsService.fetchWorkoutsByday(
                 formatter.format(workouts.getCreatedAt()),workouts.getUser_id());
@@ -40,10 +41,11 @@ public class WorksoutController {
         for (Workouts w : dailyworksout) {
             totalDuration += w.getDuration();
         }
-        Float performancescore = complexlogic.performance(totalDuration,totalWorkouts,totalCalories,workoutsThisWeek);
-
-        System.out.println(performancescore);
-        return ResponseEntity.ok(dailyworksout);
+        String performancescore_massage = complexlogic.performance(totalDuration,totalWorkouts,totalCalories,workoutsThisWeek);
+        Map<String, Object> response = Map.of(
+                "message", performancescore_massage
+        );
+        return ResponseEntity.ok(response);
     }
 
 
