@@ -24,7 +24,6 @@ public class Complexlogic {
         else if (bmi < 35) status = "Obese (Class I)";
         else if (bmi < 40) status = "Obese (Class II)";
         else status = "Obese (Class III)";
-
         return String.format("The BMI is : %.1f (%s)", bmi, status);
     }
 

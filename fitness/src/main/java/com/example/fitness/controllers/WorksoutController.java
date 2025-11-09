@@ -50,7 +50,9 @@ public class WorksoutController {
 
 
     @PostMapping("/addworksout")
-    public void addworksout(@RequestBody Workouts workouts){
+    public void addworksout(@RequestBody Workouts workouts  ,
+                            @RequestHeader("Authorization") String authorization){
+        System.out.println(authorization);
         workoutsService.addDailyWorkouts(workouts.getUser_id(),workouts.getType(),workouts.getDuration(),
                 workouts.getCalories_burned());
     }
