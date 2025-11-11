@@ -18,7 +18,6 @@ public class WorkoutsService {
         return workoutsList;
     }
     public List<Workouts> fetchAll(){
-        System.out.println("Fetching all workouts");
         return worksoutsRepository.getAllWorkouts();
     }
     public void addDailyWorkouts(Integer user_id, String type, Integer duration, Float calories_burned) {
