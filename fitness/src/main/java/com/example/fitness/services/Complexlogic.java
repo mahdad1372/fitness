@@ -52,4 +52,40 @@ public class Complexlogic {
         return massage;
     }
 
+    public Double Cardiovascular(Integer age, Float bloodPressure,Float TotalCholestrol,Float HdlCholestrol,String sex,
+                                Integer Heartrate,
+                                Integer smoker) {
+        double cardiovascular;
+        if (sex.equalsIgnoreCase("male")) {
+            cardiovascular =
+                    0.04826 * age +
+                            1.600 * TotalCholestrol -
+                            0.523 * HdlCholestrol +
+                            1.148 * bloodPressure +
+                            0.428 * smoker;
+
+            // Heart rate adjustment (custom)
+            double hrFactor = 0.015 * (Heartrate - 70);
+            cardiovascular += hrFactor;
+
+            return 1 - Math.pow(0.88936, Math.exp(cardiovascular - 23.9802));
+        }         // --------------------------
+        // WOMEN FORMULA
+        // --------------------------
+        else {
+            cardiovascular =
+                    0.33766 * age +
+                            0.26138 * TotalCholestrol -
+                            0.7181 * HdlCholestrol +
+                            2.81291 * bloodPressure +
+                            0.52873 * smoker;
+
+            // Heart rate adjustment (custom)
+            double hrFactor = 0.015 * (Heartrate - 70);
+            cardiovascular += hrFactor;
+
+            return 1 - Math.pow(0.88936, Math.exp(cardiovascular - 23.9802));
+        }
+    }
+
 }
