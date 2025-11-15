@@ -26,7 +26,8 @@ public class SecurityConfiguration {
                 .requestMatchers("/users/all","/users/adduser", "/users/**","/auth/**","/activity/addactivity",
                         "/activity/**","/foods/**","/foods/addfoods","/worksout/**"
                         ,"/auth/login", "/category/**", "/cart/**", "/getproducts", "/images/**"
-                        ,"/getproduct/**","/getproductbycategory/**","/users/adduser","/google-fit/heart-rate")
+                        ,"/getproduct/**","/getproductbycategory/**","/users/adduser","/google-fit/heart-rate",
+                        "/google-fit/nutrition","/google-fit/**")
                 .permitAll()
                 // Protected APIs that require authentication
 //                .requestMatchers()

@@ -1,5 +1,4 @@
 package com.example.fitness.services;
-
 import com.example.fitness.entitties.User;
 import com.example.fitness.repositories.UserRepository;
 import org.springframework.stereotype.Service;
