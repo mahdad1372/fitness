@@ -18,11 +18,35 @@ import java.util.Map;
 public class GoogleFitController {
 
 
-    // Endpoint to forward GET request to Google Fit heart rate dataset
-    // The token is passed in the Authorization header
-    @GetMapping("/heart-rate")
-    public ResponseEntity<String> getHeartRateData(@RequestHeader("Authorization") String authorizationHeader) {
+    private float calculateAverageHeartRate(JsonNode root) {
+        JsonNode points = root.path("point");
 
+        if (!points.isArray() || points.isEmpty()) {
+            return 0;
+        }
+
+        float sum = 0;
+        int count = 0;
+
+        for (JsonNode point : points) {
+            JsonNode valueArray = point.path("value");
+
+            if (valueArray.isArray() && !valueArray.isEmpty()) {
+                float bpm = (float) valueArray.get(0).path("fpVal").asDouble();
+                sum += bpm;
+                count++;
+            }
+        }
+
+        return (count == 0) ? 0 : sum / count;
+    }
+
+    // ---------------- Endpoint ----------------
+    @GetMapping("/heart-rate")
+    public ResponseEntity<?> getHeartRateData(
+            @RequestHeader("Authorization") String authorizationHeader) {
+
+        // Validate Authorization header
         if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body("Authorization header missing or invalid. Use 'Bearer <access_token>'.");
@@ -36,15 +60,34 @@ public class GoogleFitController {
                         "datasets/1731110400000000000-1731196800000000000";
 
         URI uri = UriComponentsBuilder.fromHttpUrl(googleFitUrl)
-                .build(true) // do NOT encode the colons
+                .build(true) // keeps colons unencoded
                 .toUri();
 
-        RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setBearerAuth(accessToken);
-        HttpEntity<Void> entity = new HttpEntity<>(headers);
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setBearerAuth(accessToken);
 
-        return restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
+            HttpEntity<Void> entity = new HttpEntity<>(headers);
+
+            // Fetch from Google Fit
+            ResponseEntity<String> response =
+                    restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
+
+            // Parse JSON
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode root = mapper.readTree(response.getBody());
+
+            // Calculate average
+            float average = calculateAverageHeartRate(root);
+
+            // Return ONLY the number
+            return ResponseEntity.ok(average);
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error fetching or processing heart rate data: " + e.getMessage());
+        }
     }
 
     // Get nutrition like the calories,fat,protein,carbs
