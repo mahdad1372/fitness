@@ -24,7 +24,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests()
                 // Public APIs that don't require authentication
                 .requestMatchers("/users/all","/users/adduser", "/users/**","/auth/**","/activity/addactivity",
-                        "/activity/**","/foods/**","/foods/addfoods","/worksout/**"
+                        "/activity/**","/foods/**","/foods/addfoods","/worksout/**","/goals/**"
                         ,"/auth/login", "/category/**", "/cart/**", "/getproducts", "/images/**"
                         ,"/getproduct/**","/getproductbycategory/**","/users/adduser","/google-fit/heart-rate",
                         "/google-fit/nutrition","/google-fit/**")

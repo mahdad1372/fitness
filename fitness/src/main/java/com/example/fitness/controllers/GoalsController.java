@@ -25,6 +25,7 @@ public class GoalsController {
         ,goals.getStart_date(),goals.getEnd_date(),goals.getStatus());
     }
 
+
     @DeleteMapping("/deleteactivity/{id}")
     public void deletegoalsbyId(@PathVariable("id") Integer id) {
         goalservice.deleteActivitiesById(id);
