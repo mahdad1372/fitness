@@ -27,7 +27,7 @@ public class SecurityConfiguration {
                         "/activity/**","/foods/**","/foods/addfoods","/worksout/**","/goals/**"
                         ,"/auth/login", "/category/**", "/cart/**", "/getproducts", "/images/**"
                         ,"/getproduct/**","/getproductbycategory/**","/users/adduser","/google-fit/heart-rate",
-                        "/google-fit/nutrition","/google-fit/**")
+                        "/google-fit/nutrition","/google-fit/**","/health_metric/**","/health_metric/cardiovascular")
                 .permitAll()
                 // Protected APIs that require authentication
 //                .requestMatchers()

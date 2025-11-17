@@ -51,41 +51,53 @@ public class Complexlogic {
                 + Status;
         return massage;
     }
+    public String estimateHeartAttackRisk(double cardiovascularScore) {
 
-    public Double Cardiovascular(Integer age, Float bloodPressure,Float TotalCholestrol,Float HdlCholestrol,String sex,
-                                Integer Heartrate,
-                                Integer smoker) {
+        if (cardiovascularScore < 200) {
+            return "Low risk";
+        } else if (cardiovascularScore < 400) {
+            return "Moderate risk";
+        } else if (cardiovascularScore < 700) {
+            return "High risk";
+        } else {
+            return "Very high risk";
+        }
+    }
+    public double  cardiovascular(Integer age, Float bloodPressure, Float cholesterol,
+                                 String sex, Float heartRate, Integer smoker) {
+
+        // Estimate HDL from total cholesterol (you can change this assumption)
+        double estimatedHdl = cholesterol * 0.20;
+
         double cardiovascular;
+
+        // --------------------------
+        // MALE FORMULA
+        // --------------------------
         if (sex.equalsIgnoreCase("male")) {
             cardiovascular =
                     0.04826 * age +
-                            1.600 * TotalCholestrol -
-                            0.523 * HdlCholestrol +
+                            1.600 * cholesterol -
+                            0.523 * estimatedHdl +
                             1.148 * bloodPressure +
                             0.428 * smoker;
 
-            // Heart rate adjustment (custom)
-            double hrFactor = 0.015 * (Heartrate - 70);
-            cardiovascular += hrFactor;
-
-            return 1 - Math.pow(0.88936, Math.exp(cardiovascular - 23.9802));
-        }         // --------------------------
-        // WOMEN FORMULA
-        // --------------------------
-        else {
+        } else {
+            // --------------------------
+            // FEMALE FORMULA
+            // --------------------------
             cardiovascular =
                     0.33766 * age +
-                            0.26138 * TotalCholestrol -
-                            0.7181 * HdlCholestrol +
+                            0.26138 * cholesterol -
+                            0.7181 * estimatedHdl +
                             2.81291 * bloodPressure +
                             0.52873 * smoker;
-
-            // Heart rate adjustment (custom)
-            double hrFactor = 0.015 * (Heartrate - 70);
-            cardiovascular += hrFactor;
-
-            return 1 - Math.pow(0.88936, Math.exp(cardiovascular - 23.9802));
         }
+
+        // Heart rate factor (custom)
+        cardiovascular += 0.015 * (heartRate - 70);
+        // Final transformation
+        return cardiovascular;
     }
 
 }
