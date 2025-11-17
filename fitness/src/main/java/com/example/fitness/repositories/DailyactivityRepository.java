@@ -19,14 +19,14 @@ public interface DailyactivityRepository extends CrudRepository<Daily_activities
     @Transactional
     @Query(value = "DELETE FROM daily_activities WHERE activity_id = :id", nativeQuery = true)
     public void deleteDaily_activitiesById(Integer id);
-@Transactional
-@Modifying
-@Query(
+    @Transactional
+    @Modifying
+    @Query(
         value = "INSERT INTO daily_activities (user_id, steps, sleep_hours, mood, notes,water_intake,calories_burned) " +
                 "VALUES (?1, ?2, ?3, ?4, ?5,?6,?7)",
         nativeQuery = true
 )
-void addDailyActivity(Integer user_id, Integer steps, Float sleep_hours, String mood, String notes
-,Float water_intake,Float calories_burned);
+    void addDailyActivity(Integer user_id, Integer steps, Float sleep_hours, String mood, String notes
+    ,Float water_intake,Float calories_burned);
 
 }

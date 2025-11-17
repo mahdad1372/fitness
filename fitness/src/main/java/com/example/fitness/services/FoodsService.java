@@ -1,5 +1,4 @@
 package com.example.fitness.services;
-
 import com.example.fitness.entitties.Foods;
 import com.example.fitness.repositories.FoodsRepository;
 import org.springframework.stereotype.Service;
