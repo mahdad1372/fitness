@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 09, 2025 at 07:28 PM
+-- Generation Time: Dec 04, 2025 at 01:25 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -83,6 +83,21 @@ CREATE TABLE `goals` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `health_metrics`
+--
+
+CREATE TABLE `health_metrics` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `cholesterol` float NOT NULL,
+  `blood_pressure` float NOT NULL,
+  `heart_rate` float NOT NULL,
+  `created_at` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -99,6 +114,14 @@ CREATE TABLE `users` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `firstname`, `lastname`, `gender`, `email`, `password`, `weight`, `height`, `created_at`, `updated_at`) VALUES
+(1, 'samuel', 'snowden', 'male', 'edward.snowden@gmail.com', 'mhd@.1993', 4.6, 1.5, '2025-12-04 11:51:02', '2025-12-04 11:51:02'),
+(3, 'leonardo', 'davinchi', 'male', 'leonardo.davinchi@gmail.com', 'leonardo@.1993', 4.6, 1.5, '2025-12-04 11:53:40', '2025-12-04 11:53:40');
+
 -- --------------------------------------------------------
 
 --
@@ -114,6 +137,14 @@ CREATE TABLE `workouts` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `workouts`
+--
+
+INSERT INTO `workouts` (`workout_id`, `user_id`, `type`, `duration`, `calories_burned`, `created_at`, `updated_at`) VALUES
+(3, 1, 'running', 20, 120, '2025-12-04 12:21:43', '2025-12-04 12:21:43'),
+(7, 3, 'swimming', 20, 120, '2025-12-04 12:24:39', '2025-12-04 12:24:39');
 
 --
 -- Indexes for dumped tables
@@ -139,6 +170,12 @@ ALTER TABLE `foods`
 ALTER TABLE `goals`
   ADD PRIMARY KEY (`goal_id`),
   ADD KEY `fk_goals_user` (`user_id`);
+
+--
+-- Indexes for table `health_metrics`
+--
+ALTER TABLE `health_metrics`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -178,16 +215,22 @@ ALTER TABLE `goals`
   MODIFY `goal_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `health_metrics`
+--
+ALTER TABLE `health_metrics`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `workouts`
 --
 ALTER TABLE `workouts`
-  MODIFY `workout_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `workout_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables

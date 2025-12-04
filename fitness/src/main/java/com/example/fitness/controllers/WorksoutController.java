@@ -4,7 +4,6 @@ import com.example.fitness.services.Complexlogic;
 import com.example.fitness.services.WorkoutsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
@@ -50,9 +49,7 @@ public class WorksoutController {
 
 
     @PostMapping("/addworksout")
-    public void addworksout(@RequestBody Workouts workouts  ,
-                            @RequestHeader("Authorization") String authorization){
-        System.out.println(authorization);
+    public void addworksout(@RequestBody Workouts workouts){
         workoutsService.addDailyWorkouts(workouts.getUser_id(),workouts.getType(),workouts.getDuration(),
                 workouts.getCalories_burned());
     }
