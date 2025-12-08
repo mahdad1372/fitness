@@ -46,7 +46,25 @@ public class WorksoutController {
         );
         return ResponseEntity.ok(response);
     }
+    @GetMapping("/dynamicrest")
+    public Map<String, Object> dynamicRest(
+            @RequestParam int repsCompleted,
+            @RequestParam int targetReps,
+            @RequestParam double weight,
+            @RequestParam(required = false) Integer rpe,
+            @RequestParam(required = false) Double estimated1RM,
+            @RequestParam(required = false) Integer baseRest
+    ) {
 
+        int restSeconds = workoutsService.calculateRest(
+                repsCompleted, targetReps, weight, estimated1RM, rpe, baseRest
+        );
+
+        return Map.of(
+                "recommendedRest", restSeconds,
+                "unit", "seconds"
+        );
+    }
 
     @PostMapping("/addworksout")
     public void addworksout(@RequestBody Workouts workouts){

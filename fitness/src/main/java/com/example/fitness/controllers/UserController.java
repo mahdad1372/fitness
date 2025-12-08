@@ -8,16 +8,19 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RequestMapping("/users")
 @RestController
 public class UserController {
     private final Complexlogic complexlogic;
     private final UserService userService;
+
     public UserController(UserService userService, Complexlogic complexlogic) {
         this.complexlogic = complexlogic;
         this.userService = userService;
     }
+
     @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
     @GetMapping("/me")
     public ResponseEntity<User> authenticatedUser() {
@@ -38,9 +41,39 @@ public class UserController {
         List<User> users = userService.fetchAll();
         return ResponseEntity.ok(users);
     }
+    @PostMapping("/getuserbyid")
+    public ResponseEntity<List<User>> allUsers(@RequestBody Map<String, Integer> request) {
+        Integer id = request.get("id");
+
+        List<User> users = userService.finduserbyid(id);
+        return ResponseEntity.ok(users);
+    }
     @GetMapping("/public-info")
     public String getPublicInfo() {
         return "This is a public API. No authentication required!";
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody User users) {
+        String email = users.getEmail();
+        String password = users.getPassword();
+
+        // Validate input
+        if (email == null || password == null) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Email and password are required"));
+        }
+
+        // Check user credentials using your UserService
+        Optional<User> user = userService.finduserbyemail(email);
+
+        if (user == null || !users.getPassword().equals(password)) {
+            return ResponseEntity.status(401).body(Map.of("error", "Invalid email or password"));
+        }
+
+        // Login successful
+        return ResponseEntity.ok(Map.of(
+                "message", "Login successful"
+        ));
     }
 
     // Public API 2: Another endpoint accessible without JWT
@@ -48,20 +81,11 @@ public class UserController {
     public String getAboutInfo() {
         return "Welcome to the application! This is publicly available information.";
     }
-    @PostMapping("/adduser")
-    public void adduser(@RequestBody User users){
-        userService.adduser(users.getUser_id(),users.getEmail(),
-                users.getFirstname(),users.getGender(),users.getHeight(),users.getLastname(),
-                users.getPassword(),users.getWeight());
-    }
-    @DeleteMapping("/deleteuser")
-    public void deleteuser(@RequestBody User users) {
-        userService.deleteuserbyId(users.getUser_id());
-    }
-    @GetMapping("/getbmi")
-    public ResponseEntity<Map<String, String>> calculateBmi(@RequestBody User users) {
-        String result = String.valueOf(complexlogic.bmi(users.getUser_id()));
-        return ResponseEntity.ok(Map.of("message", result));
 
+    @PostMapping("/adduser")
+    public void adduser(@RequestBody User users) {
+        userService.adduser(users.getUser_id(), users.getEmail(),
+                users.getFirstname(), users.getGender(), users.getHeight(), users.getLastname(),
+                users.getPassword(), users.getWeight());
     }
 }

@@ -31,4 +31,49 @@ public class WorkoutsService {
     public List<Workouts> fetchWorkoutsByweek(String created_at,Integer user_id) {
         return worksoutsRepository.findWorkoutsByweek(created_at,user_id);
     };
+    public int calculateRest(int repsCompleted, int targetReps, double weight, Double estimated1RM, Integer rpe, Integer baseRest) {
+        // targetReps = the number of reps the user was supposed to do for that set.
+        // repsCompleted = the number of reps the user actually performed in the set.
+        // rpe: How hard the set of the exercise felt (1–10).
+        // Estimated 1RM = the maximum weight the user can lift for 1 repetition for that specific exercise.
+        // base rest: Default rest for the exercise
+        // fallback defaults
+        if (estimated1RM == null || estimated1RM == 0) {
+            estimated1RM = weight * (1 + repsCompleted / 30.0);
+        }
+
+        if (baseRest == null) {
+            baseRest = 90; // default 90 seconds
+        }
+
+        int rest = baseRest;
+
+        // calculate intensity
+        double percent1RM = (weight / estimated1RM) * 100.0;
+
+        // calculate performance
+        double performanceRatio = targetReps > 0
+                ? (double) repsCompleted / targetReps
+                : 1.0;
+
+        // intensity rules
+        if (percent1RM >= 90) rest += 120;
+        else if (percent1RM >= 80) rest += 60;
+        else if (percent1RM >= 70) rest += 30;
+
+        // performance rules
+        if (performanceRatio < 0.7) rest += 30;
+
+        // RPE rules
+        if (rpe != null) {
+            if (rpe >= 9) rest += 60;
+            else if (rpe == 8) rest += 30;
+            else if (rpe <= 6) rest -= 10;
+        }
+
+        // enforce bounds
+        rest = Math.max(30, Math.min(rest, 420));
+
+        return rest;
+    }
 }
