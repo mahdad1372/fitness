@@ -31,7 +31,8 @@ public class WorkoutsService {
     public List<Workouts> fetchWorkoutsByweek(String created_at,Integer user_id) {
         return worksoutsRepository.findWorkoutsByweek(created_at,user_id);
     };
-    public int calculateRest(int repsCompleted, int targetReps, double weight, Double estimated1RM, Integer rpe, Integer baseRest) {
+    public int calculateRest(int repsCompleted, int targetReps, double weight, Double estimated1RM,
+                             Integer rpe, Integer baseRest, Integer worksout_id) {
         // targetReps = the number of reps the user was supposed to do for that set.
         // repsCompleted = the number of reps the user actually performed in the set.
         // rpe: How hard the set of the exercise felt (1–10).
@@ -72,10 +73,10 @@ public class WorkoutsService {
             else if (rpe == 8) rest += 30;
             else if (rpe <= 6) rest -= 10;
         }
-
+        double intensityPercent = (weight / estimated1RM) * 100.0;
         // enforce bounds
         rest = Math.max(30, Math.min(rest, 420));
-
+        worksoutsRepository.updateWorkoutsByWorkout_id(worksout_id,rest,rpe, (float) intensityPercent);
         return rest;
     }
 }

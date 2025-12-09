@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2025 at 01:25 PM
+-- Generation Time: Dec 09, 2025 at 04:09 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -120,7 +120,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `firstname`, `lastname`, `gender`, `email`, `password`, `weight`, `height`, `created_at`, `updated_at`) VALUES
 (1, 'samuel', 'snowden', 'male', 'edward.snowden@gmail.com', 'mhd@.1993', 4.6, 1.5, '2025-12-04 11:51:02', '2025-12-04 11:51:02'),
-(3, 'leonardo', 'davinchi', 'male', 'leonardo.davinchi@gmail.com', 'leonardo@.1993', 4.6, 1.5, '2025-12-04 11:53:40', '2025-12-04 11:53:40');
+(3, 'leonardo', 'davinchi', 'male', 'leonardo.davinchi@gmail.com', 'leonardo@.1993', 4.6, 1.5, '2025-12-04 11:53:40', '2025-12-04 11:53:40'),
+(13, 'dasacw2', '2e2ed', 'male', 'dwqdw@gmail.com', 'dwqd31e', 22, 33, '2025-12-05 11:04:39', '2025-12-05 11:04:39');
 
 -- --------------------------------------------------------
 
@@ -135,16 +136,20 @@ CREATE TABLE `workouts` (
   `duration` int(11) NOT NULL,
   `calories_burned` float NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `rest_seconds` int(11) DEFAULT NULL,
+  `rpe` int(11) DEFAULT NULL,
+  `intensity_percent` decimal(5,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `workouts`
 --
 
-INSERT INTO `workouts` (`workout_id`, `user_id`, `type`, `duration`, `calories_burned`, `created_at`, `updated_at`) VALUES
-(3, 1, 'running', 20, 120, '2025-12-04 12:21:43', '2025-12-04 12:21:43'),
-(7, 3, 'swimming', 20, 120, '2025-12-04 12:24:39', '2025-12-04 12:24:39');
+INSERT INTO `workouts` (`workout_id`, `user_id`, `type`, `duration`, `calories_burned`, `created_at`, `updated_at`, `rest_seconds`, `rpe`, `intensity_percent`) VALUES
+(3, 1, 'running', 20, 120, '2025-12-04 12:21:43', '2025-12-09 14:47:18', 150, 7, 88.24),
+(7, 3, 'swimming', 20, 120, '2025-12-04 12:24:39', '2025-12-04 12:24:39', NULL, NULL, NULL),
+(8, 3, 'chess press', 20, 120, '2025-12-09 14:51:01', '2025-12-09 14:51:25', 150, 7, 88.24);
 
 --
 -- Indexes for dumped tables
@@ -224,13 +229,13 @@ ALTER TABLE `health_metrics`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `workouts`
 --
 ALTER TABLE `workouts`
-  MODIFY `workout_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `workout_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables

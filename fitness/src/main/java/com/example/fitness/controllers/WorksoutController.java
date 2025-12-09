@@ -53,11 +53,12 @@ public class WorksoutController {
             @RequestParam double weight,
             @RequestParam(required = false) Integer rpe,
             @RequestParam(required = false) Double estimated1RM,
-            @RequestParam(required = false) Integer baseRest
+            @RequestParam(required = false) Integer baseRest,
+            @RequestParam int worksout_id
     ) {
 
         int restSeconds = workoutsService.calculateRest(
-                repsCompleted, targetReps, weight, estimated1RM, rpe, baseRest
+                repsCompleted, targetReps, weight, estimated1RM, rpe, baseRest,worksout_id
         );
 
         return Map.of(
