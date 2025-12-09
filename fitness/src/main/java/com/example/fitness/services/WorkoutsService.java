@@ -37,6 +37,8 @@ public class WorkoutsService {
         // rpe: How hard the set of the exercise felt (1–10).
         // Estimated 1RM = the maximum weight the user can lift for 1 repetition for that specific exercise.
         // base rest: Default rest for the exercise
+        // intensity_percent : It is the percentage of estimated 1RM (one-rep max) that the user lifted in a set. for example
+        // if someone lifts 80 kg, and their estimated 1RM is 100 kg, then: 80%
         // fallback defaults
         if (estimated1RM == null || estimated1RM == 0) {
             estimated1RM = weight * (1 + repsCompleted / 30.0);

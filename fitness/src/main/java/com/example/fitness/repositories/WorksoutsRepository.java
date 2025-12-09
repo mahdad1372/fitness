@@ -35,4 +35,12 @@ public interface WorksoutsRepository extends CrudRepository<Workouts, Integer> {
     )
     void addworkouts(Integer user_id, String type, Integer duration, Float calories_burned);
 
+    @Transactional
+    @Modifying
+    @Query(
+            value = "UPDATE Workouts SET rest_seconds = ?2,rpe = ?3,intensity_percent = ?4 WHERE workout_id = ?1 ",
+            nativeQuery = true
+    )
+    void updateWorkoutsByWorkout_id(Integer workout_id, Integer rest_seconds, Integer rpe, Float intensity_percent);
+
 }
